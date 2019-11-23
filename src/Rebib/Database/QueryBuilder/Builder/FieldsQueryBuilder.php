@@ -32,7 +32,7 @@ class FieldsQueryBuilder extends Builder
      * @param string $field
      * @return FieldsQueryBuilder
      */
-    public function addField($field): FieldsQueryBuilder
+    public function addField(string $field): FieldsQueryBuilder
     {
         if (!in_array($field, $this->fields)) {
             $this->fields[] = $field;

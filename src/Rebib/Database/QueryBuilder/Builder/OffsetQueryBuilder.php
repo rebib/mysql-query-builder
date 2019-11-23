@@ -16,9 +16,9 @@ class OffsetQueryBuilder extends Builder
     /**
      *
      * @param int $offset
-     * @return LimitQueryBuilder
+     * @return OffsetQueryBuilder
      */
-    public function addOffset(int $offset): LimitQueryBuilder
+    public function addOffset(int $offset): OffsetQueryBuilder
     {
         $this->queries['offset'] = $offset;
         return $this;
@@ -27,9 +27,9 @@ class OffsetQueryBuilder extends Builder
     /**
      *
      * @param int $row_count
-     * @return LimitQueryBuilder
+     * @return OffsetQueryBuilder
      */
-    public function addRowCount(int $row_count): LimitQueryBuilder
+    public function addRowCount(int $row_count): OffsetQueryBuilder
     {
         $this->queries['row_count'] = $row_count;
         return $this;
