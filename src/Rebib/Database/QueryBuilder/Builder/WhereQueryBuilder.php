@@ -86,10 +86,11 @@ class WhereQueryBuilder extends Builder
                     break;
             }
         }
-        if ($query) {
-            array_unshift($query, 'WHERE TRUE');
+        $where = $this->arrayToString($query, ' AND ');
+        if ($where) {
+            $where = $this->arrayToString(['WHERE', $where]);
         }
-        return $this->arrayToString($query, ' AND ');
+        return $where;
     }
 
     protected function buildBetweenQuery(array $conditions): string
