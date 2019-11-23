@@ -23,6 +23,15 @@ class WhereQueryBuilder extends Builder
 
     /**
      *
+     * @return array
+     */
+    public function getParameters(): array
+    {
+        return $this->parameters;
+    }
+
+    /**
+     *
      * @param Query $query
      * @return WhereQueryBuilder
      */

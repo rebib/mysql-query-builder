@@ -40,6 +40,7 @@ class SelectQueryBuilder extends CRUDQueryBuilder
      */
     private $fieldsQuery;
 
+
     /**
      * Constructor
      *
