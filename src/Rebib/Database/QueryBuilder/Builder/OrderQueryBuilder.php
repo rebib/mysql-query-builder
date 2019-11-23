@@ -8,7 +8,7 @@ class OrderQueryBuilder extends Builder
      *
      * @var array
      */
-    private $queries;
+    private $queries = [];
 
     /**
      *
