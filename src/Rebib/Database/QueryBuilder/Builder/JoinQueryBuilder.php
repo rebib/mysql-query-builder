@@ -13,12 +13,24 @@ class JoinQueryBuilder extends Builder
         'RIGHT' => [],
     ];
 
+    public function setLeftJoins(array $joins, bool $force = false): JoinQueryBuilder
+    {
+        if ($force === true) {
+            $this->queries['LEFT'] = $joins;
+        } else {
+            foreach ($joins as $join) {
+                $this->addLeftJoin($join[0], $join[1]);
+            }
+        }
+        return $this;
+    }
+
     public function addLeftJoin(array $table_reference,
                                 array $join_specification): JoinQueryBuilder
     {
         $this->queries['LEFT'][] = [
-            'table' => $table_reference,
-            'condition' => $join_specification,
+            $table_reference,
+            $join_specification,
         ];
 
         return $this;
@@ -45,9 +57,9 @@ class JoinQueryBuilder extends Builder
         foreach ($joins as $v_join) {
             $sql   = [];
             $sql[] = "$type OUTER JOIN";
-            $sql[] = '('.$this->arrayToString($v_join['table'], ',').')';
+            $sql[] = '('.$this->arrayToString($v_join[0], ',').')';
             $sql[] = 'ON';
-            $sql[] = '('.$this->arrayToString($v_join['condition'], ',').')';
+            $sql[] = '('.$this->arrayToString($v_join[1], ',').')';
 
             $query[] = $this->arrayToString($sql, ' ');
         }
