@@ -1,8 +1,8 @@
 <?php
 
-namespace Rebib\Database\QueryBuilder\Query;
+namespace Rebib\Database\QueryBuilder\Builder;
 
-class GroupQueryBuilder extends SqlQueryBuilder
+class GroupQueryBuilder extends Builder
 {
     /**
      *

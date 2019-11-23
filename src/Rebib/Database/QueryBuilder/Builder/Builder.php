@@ -1,10 +1,9 @@
 <?php
 
-namespace Rebib\Database\QueryBuilder\Query;
+namespace Rebib\Database\QueryBuilder\Builder;
 
-abstract class SqlQueryBuilder
+abstract class Builder
 {
-
 
     /**
      *

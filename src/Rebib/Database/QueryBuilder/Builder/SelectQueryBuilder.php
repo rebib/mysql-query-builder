@@ -1,10 +1,8 @@
 <?php
 
-namespace Rebib\Database\QueryBuilder\Query;
+namespace Rebib\Database\QueryBuilder\Builder;
 
-use Rebib\Database\QueryBuilder\Query\SqlQueryBuilder;
-
-class SelectQuery extends SqlQueryBuilder
+class SelectQueryBuilder extends CRUDQueryBuilder
 {
     /**
      *
@@ -37,6 +35,12 @@ class SelectQuery extends SqlQueryBuilder
     private $whereQuery;
 
     /**
+     *
+     * @var FieldsQueryBuilder
+     */
+    private $fieldsQuery;
+
+    /**
      * Constructor
      *
      */
@@ -47,6 +51,7 @@ class SelectQuery extends SqlQueryBuilder
         $this->offsetQuery = new OffsetQueryBuilder();
         $this->orderQuery  = new OrderQueryBuilder();
         $this->whereQuery  = new WhereQueryBuilder();
+        $this->fieldsQuery = new FieldsQueryBuilder();
     }
 
     /**
@@ -96,12 +101,22 @@ class SelectQuery extends SqlQueryBuilder
 
     /**
      *
+     * @return FieldsQueryBuilder
+     */
+    public function getFieldsQueryBuilder(): FieldsQueryBuilder
+    {
+        return $this->fieldsQuery;
+    }
+
+    /**
+     *
      * @return string
      */
     public function buildQuery(): string
     {
-        $query = [];
-
+        $query[] = 'SELECT';
+        $query[] = $this->getFieldsQueryBuilder()->buildQuery();
+        $query[] = 'FROM '.$this->getTable();
         $query[] = $this->getJoinQueryBuilder()->buildQuery();
         $query[] = $this->getWhereQueryBuilder()->buildQuery();
         $query[] = $this->getGroupQueryBuilder()->buildQuery();
