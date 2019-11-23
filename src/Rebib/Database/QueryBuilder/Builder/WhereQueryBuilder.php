@@ -48,7 +48,7 @@ class WhereQueryBuilder extends Builder
      * @param bool $bind bind parameter or not
      * @return WhereQueryBuilder
      */
-    public function addIs(string $expr, string $value, bool $bind = true): WhereQueryBuilder
+    public function addIsEqual(string $expr, string $value, bool $bind = true): WhereQueryBuilder
     {
         $this->queries['equal'][] = [$expr, $value, $bind, 'IS'];
         return $this;
@@ -61,7 +61,7 @@ class WhereQueryBuilder extends Builder
      * @param bool $bind bind parameter or not
      * @return WhereQueryBuilder
      */
-    public function addIsNot(string $expr, string $value, bool $bind = true): WhereQueryBuilder
+    public function addIsNotEqual(string $expr, string $value, bool $bind = true): WhereQueryBuilder
     {
         $this->queries['equal'][] = [$expr, $value, $bind, 'IS NOT'];
         return $this;
