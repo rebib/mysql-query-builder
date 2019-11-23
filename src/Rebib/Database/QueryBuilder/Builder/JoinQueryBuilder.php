@@ -44,7 +44,7 @@ class JoinQueryBuilder extends Builder
         $query = [];
         foreach ($joins as $v_join) {
             $sql   = [];
-            $sql[] = "$type OUTER JOIN ";
+            $sql[] = "$type OUTER JOIN";
             $sql[] = '('.$this->arrayToString($v_join['table'], ',').')';
             $sql[] = 'ON';
             $sql[] = '('.$this->arrayToString($v_join['condition'], ',').')';
