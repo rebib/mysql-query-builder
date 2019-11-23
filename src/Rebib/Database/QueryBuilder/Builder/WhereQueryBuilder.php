@@ -68,25 +68,28 @@ class WhereQueryBuilder extends Builder
 
     public function buildQuery(): string
     {
+        $this->parameters = [];
         $query = [];
         foreach ($this->queries as $operator => $conditions) {
+            if (!$conditions) {
+                continue;
+            }
             switch ($operator) {
                 case 'between':
                     $query[] = $this->buildBetweenQuery($conditions);
                     break;
+                case 'equal':
+                    $query[] = $this->buildEqualQuery($conditions);
+                    break;
             }
         }
         if ($query) {
-            array_unshift($query, 'WHERE');
+            array_unshift($query, 'WHERE TRUE');
         }
         return $this->arrayToString($query, ' AND ');
     }
 
-    //protected
-
-
-
-    protected function buildBetweenQuery(array $conditions)
+    protected function buildBetweenQuery(array $conditions): string
     {
         $query = [];
         foreach ($conditions as $v_condition) {
@@ -101,11 +104,11 @@ class WhereQueryBuilder extends Builder
         return '('.$this->arrayToString($query, ' AND ').')';
     }
 
-    protected function buildEqualQuery(array $conditions)
+    protected function buildEqualQuery(array $conditions): string
     {
         $query = [];
         foreach ($conditions as $v_condition) {
-            if (count($v_condition) !== 3) {
+            if (count($v_condition) !== 2) {
                 continue;
             }
             $query[] = $v_condition[0].' = ?';

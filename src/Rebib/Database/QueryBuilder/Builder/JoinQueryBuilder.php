@@ -34,7 +34,6 @@ class JoinQueryBuilder extends Builder
                     $query[] = $this->buildLROuterJoin($join, $type);
                     break;
             }
-            $query[] = '('.implode(',', $join['table']).'';
         }
         return $this->arrayToString($query);
     }
@@ -45,7 +44,7 @@ class JoinQueryBuilder extends Builder
         $query = [];
         foreach ($joins as $v_join) {
             $sql   = [];
-            $sql[] = "$type OUTER";
+            $sql[] = "$type OUTER JOIN ";
             $sql[] = '('.$this->arrayToString($v_join['table'], ',').')';
             $sql[] = 'ON';
             $sql[] = '('.$this->arrayToString($v_join['condition'], ',').')';

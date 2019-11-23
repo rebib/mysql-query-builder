@@ -42,6 +42,6 @@ class FieldsQueryBuilder extends Builder
 
     public function buildQuery(): string
     {
-
+        return $this->arrayToString($this->fields, ',');
     }
 }

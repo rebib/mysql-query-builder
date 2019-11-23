@@ -13,6 +13,9 @@ abstract class Builder
      */
     protected function arrayToString(array $queries, string $delimiter = PHP_EOL): string
     {
+        if (!$queries) {
+            return '';
+        }
         return implode($delimiter, $queries);
     }
 

@@ -2,22 +2,20 @@
 
 namespace Rebib\Database\QueryBuilder\Builder;
 
-use Rebib\Database\QueryBuilder\Builder;
-
 abstract class CRUDQueryBuilder extends Builder
 {
     /**
      *
-     * @var string
+     * @var array
      */
-    private $tables;
+    private $tables = [];
 
     /**
      *
      * @param string $table
-     * @return CRUDQuery
+     * @return CRUDQueryBuilder
      */
-    public function setTable(string $table): CRUDQuery
+    public function setTable(string $table): CRUDQueryBuilder
     {
         if (!in_array($table, $this->tables)) {
             $this->tables[] = $table;

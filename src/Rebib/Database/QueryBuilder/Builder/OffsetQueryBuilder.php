@@ -8,7 +8,7 @@ class OffsetQueryBuilder extends Builder
      *
      * @var array
      */
-    protected $queries = [
+    protected $offset = [
         'offset' => 0,
         'row_count' => 10,
     ];
@@ -20,7 +20,7 @@ class OffsetQueryBuilder extends Builder
      */
     public function addOffset(int $offset): OffsetQueryBuilder
     {
-        $this->queries['offset'] = $offset;
+        $this->offset['offset'] = $offset;
         return $this;
     }
 
@@ -31,7 +31,7 @@ class OffsetQueryBuilder extends Builder
      */
     public function addRowCount(int $row_count): OffsetQueryBuilder
     {
-        $this->queries['row_count'] = $row_count;
+        $this->offset['row_count'] = $row_count;
         return $this;
     }
 
@@ -41,6 +41,6 @@ class OffsetQueryBuilder extends Builder
      */
     public function buildQuery(): string
     {
-        return "LIMIT ".implode(', ', $this->queries);
+        return "LIMIT ".$this->arrayToString($this->offset, ',');
     }
 }

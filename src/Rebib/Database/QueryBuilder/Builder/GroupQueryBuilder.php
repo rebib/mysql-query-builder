@@ -8,10 +8,10 @@ class GroupQueryBuilder extends Builder
      *
      * @var array
      */
-    private $queries;
+    private $groups = [];
 
     public function buildQuery(): string
     {
-
+        return $this->arrayToString($this->groups, ',');
     }
 }
