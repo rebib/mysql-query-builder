@@ -42,6 +42,9 @@ class FieldsQueryBuilder extends Builder
 
     public function buildQuery(): string
     {
+        if(!$this->fields){
+            $this->fields = ['*'];
+        }
         return $this->arrayToString($this->fields, ',');
     }
 }

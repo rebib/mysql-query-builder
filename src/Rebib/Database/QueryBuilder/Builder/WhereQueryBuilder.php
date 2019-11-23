@@ -19,7 +19,7 @@ class WhereQueryBuilder extends Builder
      *
      * @var array
      */
-    private $parameters = [];
+    private $params = [];
 
     /**
      *
@@ -27,7 +27,7 @@ class WhereQueryBuilder extends Builder
      */
     public function getParameters(): array
     {
-        return $this->parameters;
+        return $this->params;
     }
 
     /**
@@ -48,9 +48,36 @@ class WhereQueryBuilder extends Builder
      * @param bool $bind bind parameter or not
      * @return WhereQueryBuilder
      */
+    public function addGreaterEqual(string $expr, string $value,
+                                    bool $bind = true): WhereQueryBuilder
+    {
+        $this->queries['equal'][] = [$expr, $value, $bind, '>='];
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $expr
+     * @param string $value
+     * @param bool $bind bind parameter or not
+     * @return WhereQueryBuilder
+     */
+    public function addLessEqual(string $expr, string $value, bool $bind = true): WhereQueryBuilder
+    {
+        $this->queries['equal'][] = [$expr, $value, $bind, '<='];
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $expr
+     * @param string $value
+     * @param bool $bind bind parameter or not
+     * @return WhereQueryBuilder
+     */
     public function addEqual(string $expr, string $value, bool $bind = true): WhereQueryBuilder
     {
-        $this->queries['equal'][] = [$expr, $value, $bind];
+        $this->queries['equal'][] = [$expr, $value, $bind, '='];
         return $this;
     }
 
@@ -71,8 +98,8 @@ class WhereQueryBuilder extends Builder
 
     public function buildQuery(): string
     {
-        $this->parameters = [];
-        $query            = [];
+        $this->params = [];
+        $query        = [];
         foreach ($this->queries as $operator => $conditions) {
             if (!$conditions) {
                 continue;
@@ -100,13 +127,15 @@ class WhereQueryBuilder extends Builder
             if (count($v_condition) !== 4) {
                 continue;
             }
+            $con = $v_condition[0];
             if ($v_condition[3]) {
-                $query[]            = $v_condition[0].' BETWEEN ? AND ?';
-                $this->parameters[] = $v_condition[1];
-                $this->parameters[] = $v_condition[2];
+                $con            .= ' BETWEEN ? AND ?';
+                $this->params[] = $v_condition[1];
+                $this->params[] = $v_condition[2];
             } else {
-                $query[] = $v_condition[0].' BETWEEN '.$v_condition[1].' AND '.$v_condition[2];
+                $con .= ' BETWEEN '.$v_condition[1].' AND '.$v_condition[2];
             }
+            $query[] = $con;
         }
         return '('.$this->arrayToString($query, ' AND ').')';
     }
@@ -115,15 +144,17 @@ class WhereQueryBuilder extends Builder
     {
         $query = [];
         foreach ($conditions as $v_condition) {
-            if (count($v_condition) !== 3) {
+            if (count($v_condition) !== 4) {
                 continue;
             }
+            $con = $v_condition[0].' '.$v_condition[3].' ';
             if ($v_condition[2]) {
-                $query[]            = $v_condition[0].' = ?';
-                $this->parameters[] = $v_condition[1];
+                $con            .= "?";
+                $this->params[] = $v_condition[1];
             } else {
-                $query[] = $v_condition[0].' = '.$v_condition[1];
+                $con .= $v_condition[1];
             }
+            $query[] = $con;
         }
         return '('.$this->arrayToString($query, ' AND ').')';
     }
