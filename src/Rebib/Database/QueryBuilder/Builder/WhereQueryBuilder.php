@@ -48,6 +48,45 @@ class WhereQueryBuilder extends Builder
      * @param bool $bind bind parameter or not
      * @return WhereQueryBuilder
      */
+    public function addIs(string $expr, string $value, bool $bind = true): WhereQueryBuilder
+    {
+        $this->queries['equal'][] = [$expr, $value, $bind, 'IS'];
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $expr
+     * @param string $value
+     * @param bool $bind bind parameter or not
+     * @return WhereQueryBuilder
+     */
+    public function addIsNot(string $expr, string $value, bool $bind = true): WhereQueryBuilder
+    {
+        $this->queries['equal'][] = [$expr, $value, $bind, 'IS NOT'];
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $expr
+     * @param string $value
+     * @param bool $bind bind parameter or not
+     * @return WhereQueryBuilder
+     */
+    public function addNotEqual(string $expr, string $value, bool $bind = true): WhereQueryBuilder
+    {
+        $this->queries['equal'][] = [$expr, $value, $bind, '<>'];
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $expr
+     * @param string $value
+     * @param bool $bind bind parameter or not
+     * @return WhereQueryBuilder
+     */
     public function addGreaterEqual(string $expr, string $value,
                                     bool $bind = true): WhereQueryBuilder
     {
