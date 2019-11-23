@@ -152,9 +152,9 @@ class WhereQueryBuilder extends Builder
                     break;
             }
         }
-        $where = $this->arrayToString($query, PHP_EOL.' AND ');
+        $where = $this->arrayToString($query, PHP_EOL.'    AND ');
         if ($where) {
-            $where = $this->arrayToString(['WHERE', $where]);
+            $where = 'WHERE '.$where;
         }
         return $where;
     }
@@ -176,7 +176,7 @@ class WhereQueryBuilder extends Builder
             }
             $query[] = $con;
         }
-        return '('.$this->arrayToString($query, PHP_EOL.' AND ').')';
+        return '('.$this->arrayToString($query, PHP_EOL.'    AND ').')';
     }
 
     protected function buildEqualQuery(array $conditions): string
