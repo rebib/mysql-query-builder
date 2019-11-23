@@ -2,6 +2,8 @@
 
 namespace Rebib\Database\QueryBuilder\Builder;
 
+use InvalidArgumentException;
+
 abstract class Builder
 {
 
@@ -17,6 +19,17 @@ abstract class Builder
             return '';
         }
         return implode($delimiter, $queries);
+    }
+
+    /**
+     * TODO
+     * 
+     * @throws InvalidArgumentException
+     */
+    protected function TODO()
+    {
+        //TODO
+        throw new InvalidArgumentException('TODO: '.get_class($this));
     }
 
     /**

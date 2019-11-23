@@ -3,6 +3,7 @@
 namespace Rebib\Database\QueryBuilder\Builder;
 
 use Rebib\Database\QueryBuilder\Query\Query;
+use InvalidArgumentException;
 
 class WhereQueryBuilder extends Builder
 {
@@ -51,7 +52,20 @@ class WhereQueryBuilder extends Builder
      */
     public function addIn(string $expr, array $value, bool $bind = true): WhereQueryBuilder
     {
-        $this->queries['in'][] = [$expr, $value, $bind, 'IN'];
+        $this->queries['in'][] = [$bind, $expr, $value, 'IN'];
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $expr
+     * @param array $value
+     * @param bool $bind bind parameter or not
+     * @return WhereQueryBuilder
+     */
+    public function addNotIn(string $expr, array $value, bool $bind = true): WhereQueryBuilder
+    {
+        $this->queries['in'][] = [$bind, $expr, $value, 'NOT IN'];
         return $this;
     }
 
@@ -64,7 +78,7 @@ class WhereQueryBuilder extends Builder
      */
     public function addIsEqual(string $expr, string $value, bool $bind = true): WhereQueryBuilder
     {
-        $this->queries['equal'][] = [$expr, $value, $bind, 'IS'];
+        $this->queries['equal'][] = [$bind, $expr, $value, 'IS'];
         return $this;
     }
 
@@ -77,7 +91,7 @@ class WhereQueryBuilder extends Builder
      */
     public function addIsNotEqual(string $expr, string $value, bool $bind = true): WhereQueryBuilder
     {
-        $this->queries['equal'][] = [$expr, $value, $bind, 'IS NOT'];
+        $this->queries['equal'][] = [$bind, $expr, $value, 'IS NOT'];
         return $this;
     }
 
@@ -90,7 +104,7 @@ class WhereQueryBuilder extends Builder
      */
     public function addNotEqual(string $expr, string $value, bool $bind = true): WhereQueryBuilder
     {
-        $this->queries['equal'][] = [$expr, $value, $bind, '<>'];
+        $this->queries['equal'][] = [$bind, $expr, $value, '<>'];
         return $this;
     }
 
@@ -104,7 +118,7 @@ class WhereQueryBuilder extends Builder
     public function addGreaterEqual(string $expr, string $value,
                                     bool $bind = true): WhereQueryBuilder
     {
-        $this->queries['equal'][] = [$expr, $value, $bind, '>='];
+        $this->queries['equal'][] = [$bind, $expr, $value, '>='];
         return $this;
     }
 
@@ -117,7 +131,7 @@ class WhereQueryBuilder extends Builder
      */
     public function addLessEqual(string $expr, string $value, bool $bind = true): WhereQueryBuilder
     {
-        $this->queries['equal'][] = [$expr, $value, $bind, '<='];
+        $this->queries['equal'][] = [$bind, $expr, $value, '<='];
         return $this;
     }
 
@@ -130,7 +144,7 @@ class WhereQueryBuilder extends Builder
      */
     public function addEqual(string $expr, string $value, bool $bind = true): WhereQueryBuilder
     {
-        $this->queries['equal'][] = [$expr, $value, $bind, '='];
+        $this->queries['equal'][] = [$bind, $expr, $value, '='];
         return $this;
     }
 
@@ -145,7 +159,7 @@ class WhereQueryBuilder extends Builder
     public function addBetween(string $expr, string $min, string $max,
                                bool $bind = true): WhereQueryBuilder
     {
-        $this->queries['between'][] = [$expr, $min, $max, $bind];
+        $this->queries['between'][] = [$bind, $expr, $min, $max];
         return $this;
     }
 
@@ -179,7 +193,24 @@ class WhereQueryBuilder extends Builder
     protected function buildInQuery(array $conditions): string
     {
         $query = [];
-
+        foreach ($conditions as $v_condition) {
+            if (count($v_condition) !== 4) {
+                continue;
+            }
+            list($bind, $expr, $value, $operator) = $v_condition;
+            $con   = [];
+            $con[] = $expr;
+            if ($bind) {
+                //TODO
+                $this->TODO();
+            } else {
+                $con[] = $operator;
+                $con[] = '(';
+                $con[] = $this->arrayToString($value, ',');
+                $con[] = ')';
+            }
+            $query[] = $this->arrayToString($con, ' ');
+        }
         return '('.$this->arrayToString($query, PHP_EOL.'    AND ').')';
     }
 
@@ -190,15 +221,17 @@ class WhereQueryBuilder extends Builder
             if (count($v_condition) !== 4) {
                 continue;
             }
-            $con = $v_condition[0];
-            if ($v_condition[3]) {
-                $con            .= ' BETWEEN ? AND ?';
-                $this->params[] = $v_condition[1];
-                $this->params[] = $v_condition[2];
+            list($bind, $expr, $min, $max ) = $v_condition;
+            $con   = [];
+            $con[] = $expr;
+            if ($bind) {
+                $con[]          = 'BETWEEN ? AND ?';
+                $this->params[] = $min;
+                $this->params[] = $max;
             } else {
-                $con .= ' BETWEEN '.$v_condition[1].' AND '.$v_condition[2];
+                $con[] = 'BETWEEN '.$min.' AND '.$max;
             }
-            $query[] = $con;
+            $query[] = $this->arrayToString($con, ' ');
         }
         return '('.$this->arrayToString($query, PHP_EOL.'    AND ').')';
     }
@@ -210,14 +243,17 @@ class WhereQueryBuilder extends Builder
             if (count($v_condition) !== 4) {
                 continue;
             }
-            $con = $v_condition[0].' '.$v_condition[3].' ';
-            if ($v_condition[2]) {
-                $con            .= "?";
-                $this->params[] = $v_condition[1];
+            list($bind, $expr, $value, $operator) = $v_condition;
+            $con   = [];
+            $con[] = $expr;
+            $con[] = $operator;
+            if ($bind) {
+                $con[]          = "?";
+                $this->params[] = $value;
             } else {
-                $con .= $v_condition[1];
+                $con[] = $value;
             }
-            $query[] = $con;
+            $query[] = $this->arrayToString($con, ' ');
         }
         return '('.$this->arrayToString($query, PHP_EOL.' AND ').')';
     }
