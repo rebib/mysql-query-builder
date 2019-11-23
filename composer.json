@@ -1,0 +1,38 @@
+{
+    "name": "rebib/mysql-querybuilder",
+    "description": "The Query Builder may be used to generate SQL queries in an object orientated fashion.",
+    "type": "package",
+    "keywords": [        
+        "querybuilder",
+        "mysql"
+    ],
+    "license": "mit",
+    "authors": [
+        {
+            "name": "Zhao",
+            "email": "zhao2051@gmail.com"
+        }
+    ],    
+    "require": {
+        "php": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rebib\\Database\\QueryBuilder\\": "src/Rebib"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Rebib\\Test\\": "tests/Rebib/Test"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8"
+    }
+}
