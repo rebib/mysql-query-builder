@@ -13,6 +13,7 @@ class WhereQueryBuilder extends Builder
     private $queries = [
         'between' => [],
         'equal' => [],
+        'in' => [],
     ];
 
     /**
@@ -38,6 +39,19 @@ class WhereQueryBuilder extends Builder
     public function addQuery(Query $query): WhereQueryBuilder
     {
         //TODO
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $expr
+     * @param array $value
+     * @param bool $bind bind parameter or not
+     * @return WhereQueryBuilder
+     */
+    public function addIn(string $expr, array $value, bool $bind = true): WhereQueryBuilder
+    {
+        $this->queries['in'][] = [$expr, $value, $bind, 'IN'];
         return $this;
     }
 
@@ -150,6 +164,9 @@ class WhereQueryBuilder extends Builder
                 case 'equal':
                     $query[] = $this->buildEqualQuery($conditions);
                     break;
+                case 'in':
+                    $query[] = $this->buildInQuery($conditions);
+                    break;
             }
         }
         $where = $this->arrayToString($query, PHP_EOL.'    AND ');
@@ -157,6 +174,13 @@ class WhereQueryBuilder extends Builder
             $where = 'WHERE '.$where;
         }
         return $where;
+    }
+
+    protected function buildInQuery(array $conditions): string
+    {
+        $query = [];
+
+        return '('.$this->arrayToString($query, PHP_EOL.'    AND ').')';
     }
 
     protected function buildBetweenQuery(array $conditions): string
