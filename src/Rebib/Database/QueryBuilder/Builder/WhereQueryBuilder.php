@@ -2,8 +2,9 @@
 
 namespace Rebib\Database\QueryBuilder\Builder;
 
-use Rebib\Database\QueryBuilder\Query\Query;
 use InvalidArgumentException;
+use Rebib\Database\QueryBuilder\Query\Query;
+use Rebib\Database\QueryBuilder\Query\OrQuery;
 
 class WhereQueryBuilder extends Builder
 {
@@ -16,6 +17,12 @@ class WhereQueryBuilder extends Builder
         'equal' => [],
         'in' => [],
     ];
+
+    /**
+     *
+     * @var array
+     */
+    private $query = [];
 
     /**
      *
@@ -39,7 +46,7 @@ class WhereQueryBuilder extends Builder
      */
     public function addQuery(Query $query): WhereQueryBuilder
     {
-        //TODO
+        $this->query[] = $query;
         return $this;
     }
 
@@ -167,23 +174,24 @@ class WhereQueryBuilder extends Builder
     {
         $this->params = [];
         $query        = [];
-        foreach ($this->queries as $operator => $conditions) {
-            if (!$conditions) {
-                continue;
-            }
-            switch ($operator) {
-                case 'between':
-                    $query[] = $this->buildBetweenQuery($conditions);
-                    break;
-                case 'equal':
-                    $query[] = $this->buildEqualQuery($conditions);
-                    break;
-                case 'in':
-                    $query[] = $this->buildInQuery($conditions);
-                    break;
+        foreach ($this->queries as $operator => $v_query) {
+            if ($v_query instanceof Query) {
+                $query[] = $v_query->buildQuery($this->params);
+            } elseif ($v_query) {
+                switch ($operator) {
+                    case 'between':
+                        $query[] = $this->buildBetweenQuery($v_query);
+                        break;
+                    case 'equal':
+                        $query[] = $this->buildEqualQuery($v_query);
+                        break;
+                    case 'in':
+                        $query[] = $this->buildInQuery($v_query);
+                        break;
+                }
             }
         }
-        $where = $this->arrayToString($query, PHP_EOL.'    AND ');
+        $where = $this->arrayToString($query, PHP_EOL.'AND ');
         if ($where) {
             $where = 'WHERE '.$where;
         }
