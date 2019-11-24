@@ -10,7 +10,7 @@ class OffsetQueryBuilder extends Builder
      */
     protected $offset = [
         'offset' => 0,
-        'row_count' => 10,
+        'row_count' => 0,
     ];
 
     /**
@@ -41,6 +41,9 @@ class OffsetQueryBuilder extends Builder
      */
     public function buildQuery(): string
     {
+        if (!$this->offset['row_count']) {
+            return '';
+        }
         return "LIMIT ".$this->arrayToString($this->offset, ',');
     }
 }
