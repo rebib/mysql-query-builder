@@ -40,7 +40,6 @@ class SelectQueryBuilder extends CRUDQueryBuilder
      */
     private $fieldsQuery;
 
-
     /**
      * Constructor
      *
@@ -53,6 +52,16 @@ class SelectQueryBuilder extends CRUDQueryBuilder
         $this->orderQuery  = new OrderQueryBuilder();
         $this->whereQuery  = new WhereQueryBuilder();
         $this->fieldsQuery = new FieldsQueryBuilder();
+    }
+
+    public function __clone()
+    {
+        $this->groupQuery  = clone( $this->groupQuery);
+        $this->joinQuery   = clone( $this->joinQuery);
+        $this->offsetQuery = clone( $this->offsetQuery);
+        $this->orderQuery  = clone( $this->orderQuery);
+        $this->whereQuery  = clone( $this->whereQuery);
+        $this->fieldsQuery = clone( $this->fieldsQuery);
     }
 
     /**
