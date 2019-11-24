@@ -132,6 +132,6 @@ class SelectQueryBuilder extends CRUDQueryBuilder
         $query[] = $this->getGroupQueryBuilder()->buildQuery();
         $query[] = $this->getOrderQueryBuilder()->buildQuery();
         $query[] = $this->getOffsetQueryBuilder()->buildQuery();
-        return $this->arrayToString(array_filter($query));
+        return $this->arrayToString($query);
     }
 }

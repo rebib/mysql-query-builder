@@ -15,10 +15,11 @@ abstract class Builder
      */
     protected function arrayToString(array $queries, string $delimiter = PHP_EOL): string
     {
-        if (!$queries) {
+        $data = array_filter(array_map('trim', $queries));
+        if (!$data) {
             return '';
         }
-        return implode($delimiter, $queries);
+        return implode($delimiter, $data);
     }
 
     /**
