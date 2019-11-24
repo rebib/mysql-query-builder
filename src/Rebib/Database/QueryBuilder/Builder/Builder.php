@@ -15,7 +15,7 @@ abstract class Builder
      */
     protected function arrayToString(array $queries, string $delimiter = PHP_EOL): string
     {
-        $data = array_filter(array_map('trim', $queries));
+        $data = array_filter(array_map('trim', $queries), 'strlen');
         if (!$data) {
             return '';
         }
