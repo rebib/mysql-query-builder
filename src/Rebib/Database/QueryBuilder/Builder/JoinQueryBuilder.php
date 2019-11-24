@@ -19,6 +19,12 @@ class JoinQueryBuilder extends Builder
             $this->queries['LEFT'] = $joins;
         } else {
             foreach ($joins as $join) {
+                if (!is_array($join[0])) {
+                    $join[0] = [$join[0]];
+                }
+                if (!is_array($join[1])) {
+                    $join[1] = [$join[1]];
+                }
                 $this->addLeftJoin($join[0], $join[1]);
             }
         }
