@@ -22,12 +22,6 @@ class WhereQueryBuilder extends Builder
      *
      * @var array
      */
-    private $query = [];
-
-    /**
-     *
-     * @var array
-     */
     private $params = [];
 
     /**
@@ -46,7 +40,7 @@ class WhereQueryBuilder extends Builder
      */
     public function addQuery(Query $query): WhereQueryBuilder
     {
-        $this->query[] = $query;
+        $this->queries[] = $query;
         return $this;
     }
 
