@@ -8,15 +8,15 @@ class ColumnExpression extends Expression
     /**
      *
      * @param string $column_name
-     * @param string|null $table_reference
+     * @param string|null $table_ref
      * @return ColumnExpression
      */
-    public function add(string $column_name, ?string $table_reference = null): ColumnExpression
+    public function add(string $column_name, ?string $table_ref = null): ColumnExpression
     {
-        if (empty($table_reference)) {
+        if (empty($table_ref)) {
             $this->expression[] = $column_name;
         } else {
-            $this->expression[] = $table_reference.'.'.$column_name;
+            $this->expression[] = $table_ref.'.'.$column_name;
         }
         return $this;
     }
