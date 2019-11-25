@@ -28,6 +28,6 @@ abstract class AndOrQuery extends Query
         foreach ($this->toArray() as $v_query) {
             $queries[] = $v_query->buildQuery($params);
         }
-        return '('.$this->arrayToString($queries, $this->operator()).')';
+        return '('.$this->arrayToString($queries, $this->operator).')';
     }
 }

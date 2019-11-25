@@ -13,6 +13,7 @@ use Rebib\Database\QueryBuilder\Query\IsNotEqualQuery;
 use Rebib\Database\QueryBuilder\Query\LessEqualQuery;
 use Rebib\Database\QueryBuilder\Query\LessQuery;
 use Rebib\Database\QueryBuilder\Query\NotInQuery;
+use Rebib\Database\QueryBuilder\Query\NotEqualQuery;
 use Rebib\Database\QueryBuilder\Query\OrQuery;
 
 class QueryCreator
@@ -71,6 +72,11 @@ class QueryCreator
     public static function getNotInQuery(): NotInQuery
     {
         return new NotInQuery();
+    }
+
+    public static function getNotEqualQuery(): NotEqualQuery
+    {
+        return new NotEqualQuery();
     }
 
     public static function getOrQuery(): OrQuery

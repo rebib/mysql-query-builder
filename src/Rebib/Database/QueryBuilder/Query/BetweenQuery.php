@@ -38,7 +38,7 @@ class BetweenQuery extends Query
 
             $min = $max = '?';
         }
-        $queries[] = sprintf($this->operator(), $min, $max);
+        $queries[] = sprintf($this->operator, $min, $max);
         return $this->arrayToString($queries, ' ');
     }
 }

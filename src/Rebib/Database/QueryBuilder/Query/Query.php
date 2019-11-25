@@ -10,16 +10,7 @@ abstract class Query extends Base
      *
      * @var string
      */
-    protected $operator = '=';
-
-    /**
-     *
-     * @return string
-     */
-    public function operator(): string
-    {
-        return $this->operator;
-    }
+    protected $operator = ' = ';
 
     /**
      *
