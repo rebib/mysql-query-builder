@@ -19,6 +19,9 @@ class IsEqualQuery extends EqualQuery
      */
     public function add(string $expr, string $value, bool $bind = true): IsEqualQuery
     {
+        if (in_array($value, ['TRUE', 'FALSE', 'UNKNOWN', 'NULL'])) {
+            return $this;
+        }
         return $this->add($expr, $value, false);
     }
 }
