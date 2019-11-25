@@ -2,7 +2,7 @@
 
 namespace Rebib\Database\QueryBuilder\Query;
 
-class AndOrQuery extends Query
+abstract class AndOrQuery extends Query
 {
     /**
      *
