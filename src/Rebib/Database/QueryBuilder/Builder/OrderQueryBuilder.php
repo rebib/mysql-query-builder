@@ -23,7 +23,7 @@ class OrderQueryBuilder extends Builder
     {
         if (!empty($table_ref)) {
             $column = $table_ref.'.'.$column;
-        } 
+        }
         if ($force === false && !empty($this->queries[$column])) {
             return $this;
         } else {
