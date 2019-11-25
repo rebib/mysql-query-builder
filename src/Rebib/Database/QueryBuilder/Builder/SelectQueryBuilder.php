@@ -124,8 +124,7 @@ class SelectQueryBuilder extends CRUDQueryBuilder
      */
     public function buildQuery(): string
     {
-        $query[] = 'SELECT';
-        $query[] = $this->getFieldsQueryBuilder()->buildQuery();
+        $query[] = 'SELECT '.$this->getFieldsQueryBuilder()->buildQuery();
         $query[] = 'FROM '.$this->getTable();
         $query[] = $this->getJoinQueryBuilder()->buildQuery();
         $query[] = $this->getWhereQueryBuilder()->buildQuery();

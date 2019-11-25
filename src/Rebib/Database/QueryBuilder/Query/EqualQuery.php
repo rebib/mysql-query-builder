@@ -38,6 +38,6 @@ class EqualQuery extends Query
         } else {
             $queries[] = $value;
         }
-        return $this->arrayToString($queries, ' ');
+        return $this->normalizeQuery($this->arrayToString($queries, ' '));
     }
 }
