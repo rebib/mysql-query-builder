@@ -14,11 +14,16 @@ class OrderQueryBuilder extends Builder
      *
      * @param string $column
      * @param string $order
+     * @param string $table_ref
      * @param bool $force replace or not if exists
      * @return OrderQueryBuilder
      */
-    public function addOrder(string $column, string $order, bool $force = false): OrderQueryBuilder
+    public function addOrder(string $column, string $order,
+                             string $table_ref = null, bool $force = false): OrderQueryBuilder
     {
+        if (!empty($table_ref)) {
+            $column = $table_ref.'.'.$column;
+        }
         if ($force === false && !empty($this->queries[$column])) {
             return $this;
         } else {
@@ -35,24 +40,28 @@ class OrderQueryBuilder extends Builder
      * Add ASC ORDER
      *
      * @param string $column
+     * @param string $table_ref
      * @param bool $force replace or not if exists
      * @return OrderQueryBuilder
      */
-    public function addOrderByAsc(string $column, bool $force = false): OrderQueryBuilder
+    public function addOrderByAsc(string $column, string $table_ref = null,
+                                  bool $force = false): OrderQueryBuilder
     {
-        return $this->addOrder($column, 'ASC', $force);
+        return $this->addOrder($column, 'ASC', $table_ref, $force);
     }
 
     /**
      * Add DESC ORDER
      *
      * @param string $column
-     * @param bool $force replace or not if exists
+     * @param string $table_ref
+     * @param bool $force
      * @return OrderQueryBuilder
      */
-    public function addOrderByDesc(string $column, bool $force = false): OrderQueryBuilder
+    public function addOrderByDesc(string $column, string $table_ref = null,
+                                   bool $force = false): OrderQueryBuilder
     {
-        return $this->addOrder($column, 'DESC', $force);
+        return $this->addOrder($column, 'DESC', $table_ref, $force);
     }
 
     /**
@@ -68,6 +77,6 @@ class OrderQueryBuilder extends Builder
         foreach ($this->queries as $column => $order) {
             $query[] = "$column $order";
         }
-        return 'ORDER BY '.implode(', ', $query);
+        return 'ORDER BY '.$this->arrayToString($query, ', ');
     }
 }
