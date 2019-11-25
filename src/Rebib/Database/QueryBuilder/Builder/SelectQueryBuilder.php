@@ -46,6 +46,8 @@ class SelectQueryBuilder extends CRUDQueryBuilder
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->groupQuery  = new GroupQueryBuilder();
         $this->joinQuery   = new JoinQueryBuilder();
         $this->offsetQuery = new OffsetQueryBuilder();

@@ -7,6 +7,6 @@ class InsertQueryBuilder extends CRUDQueryBuilder
 
     public function buildQuery(): string
     {
-
+        //TODO
     }
 }

@@ -37,4 +37,19 @@ abstract class Base
         $this->elements = [];
         return $this;
     }
+
+    /**
+     *
+     * @param array $queries
+     * @param string $delimiter
+     * @return string
+     */
+    protected function arrayToString(array $queries, string $delimiter = PHP_EOL): string
+    {
+        $data = array_filter(array_map('trim', $queries), 'strlen');
+        if (!$data) {
+            return '';
+        }
+        return implode($delimiter, $data);
+    }
 }

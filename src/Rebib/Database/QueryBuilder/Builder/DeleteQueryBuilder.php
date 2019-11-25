@@ -7,6 +7,6 @@ class DeleteQueryBuilder extends CRUDQueryBuilder
 
     public function buildQuery(): string
     {
-
+        //TODO
     }
 }

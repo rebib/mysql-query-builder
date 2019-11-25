@@ -7,6 +7,6 @@ class UpdateQueryBuilder extends CRUDQueryBuilder
 
     public function buildQuery(): string
     {
-
+        //TODO
     }
 }
