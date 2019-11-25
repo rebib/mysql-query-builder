@@ -35,9 +35,7 @@ class InQuery extends Query
         } else {
             $queries[] = $expr;
             $queries[] = $operator;
-            $queries[] = '(';
-            $queries[] = $this->arrayToString($value, ',');
-            $queries[] = ')';
+            $queries[] = '('.$this->arrayToString($value, ',').')';
         }
         return $this->arrayToString($queries, ' ');
     }
