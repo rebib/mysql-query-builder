@@ -17,8 +17,8 @@ class IsEqualQuery extends EqualQuery
      * @param bool $bind bind parameter or not
      * @return EqualQuery
      */
-    public function add(string $expr, string $value, bool $bind = false): IsEqualQuery
+    public function add(string $expr, string $value, bool $bind = true): IsEqualQuery
     {
-        return $this->add($expr, $value, $bind);
+        return $this->add($expr, $value, false);
     }
 }
