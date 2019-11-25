@@ -19,7 +19,7 @@ class JoinClause extends Clause
         if (!is_array($join_specification)) {
             $join_specification = [$join_specification];
         }
-        $this->clause[] = [
+        $this->elements[] = [
             $table_reference,
             $join_specification
         ];

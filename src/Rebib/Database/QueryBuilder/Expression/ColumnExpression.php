@@ -14,9 +14,9 @@ class ColumnExpression extends Expression
     public function add(string $column_name, ?string $table_ref = null): ColumnExpression
     {
         if (empty($table_ref)) {
-            $this->expression[] = $column_name;
+            $this->elements[] = $column_name;
         } else {
-            $this->expression[] = $table_ref.'.'.$column_name;
+            $this->elements[] = $table_ref.'.'.$column_name;
         }
         return $this;
     }

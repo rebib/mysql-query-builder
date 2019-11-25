@@ -2,29 +2,9 @@
 
 namespace Rebib\Database\QueryBuilder\Expression;
 
-abstract class Expression
+use Rebib\Database\QueryBuilder\Statement\Base;
+
+abstract class Expression extends Base
 {
-    /**
-     *
-     * @var array
-     */
-    protected $expression = [];
-
-    /**
-     * Constructor
-     *
-     */
-    public function __construct()
-    {
-        $this->expression = [];
-    }
-
-    /**
-     *
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return $this->expression;
-    }
+   
 }

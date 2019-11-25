@@ -17,7 +17,7 @@ abstract class AndOrQuery extends Query
      */
     public function add(Query $query): AndOrQuery
     {
-        $this->query[] = $query;
+        $this->elements[] = $query;
 
         return $this;
     }
@@ -25,7 +25,7 @@ abstract class AndOrQuery extends Query
     public function buildQuery(array &$params): string
     {
         $queries = [];
-        foreach ($this->query() as $v_query) {
+        foreach ($this->toArray() as $v_query) {
             $queries[] = $v_query->buildQuery($params);
         }
         return '('.$this->arrayToString($queries, $this->operator()).')';

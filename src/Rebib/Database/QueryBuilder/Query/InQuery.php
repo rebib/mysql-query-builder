@@ -19,13 +19,13 @@ class InQuery extends Query
      */
     public function add(string $expr, array $value, bool $bind = true): InQuery
     {
-        $this->query = [$bind, $expr, $value];
+        $this->elements = [$bind, $expr, $value];
         return $this;
     }
 
     public function buildQuery(array &$params): string
     {
-        list($bind, $expr, $value) = $this->query();
+        list($bind, $expr, $value) = $this->toArray();
         $operator = $this->operator();
 
         $queries = [];

@@ -21,16 +21,16 @@ class BetweenQuery extends Query
     public function add(string $expr, string $min, string $max,
                         bool $bind = true): BetweenQuery
     {
-        $this->query = [$bind, $expr, $min, $max];
+        $this->elements = [$bind, $expr, $min, $max];
         return $this;
     }
 
     public function buildQuery(array &$params): string
     {
-        if(!$this->query()){
+        if(!$this->toArray()){
             return '';
         }
-        list($bind, $expr, $min, $max ) = $this->query();
+        list($bind, $expr, $min, $max ) = $this->toArray();
         $queries = [$expr];
         if ($bind) {
             $params[] = $min;

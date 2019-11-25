@@ -2,28 +2,15 @@
 
 namespace Rebib\Database\QueryBuilder\Query;
 
-abstract class Query
+use Rebib\Database\QueryBuilder\Statement\Base;
+
+abstract class Query extends Base
 {
     /**
      *
      * @var string
      */
     protected $operator = '=';
-
-    /**
-     *
-     * @var array
-     */
-    protected $query = [];
-
-    /**
-     *
-     * @return array
-     */
-    public function query(): array
-    {
-        return $this->query;
-    }
 
     /**
      *

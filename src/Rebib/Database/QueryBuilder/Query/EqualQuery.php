@@ -19,16 +19,16 @@ class EqualQuery extends Query
      */
     public function add(string $expr, string $value, bool $bind = true): EqualQuery
     {
-        $this->query = [$bind, $expr, $value];
+        $this->elements = [$bind, $expr, $value];
         return $this;
     }
 
     public function buildQuery(array &$params): string
     {
-        if (!$this->query()) {
+        if (!$this->toArray()) {
             return '';
         }
-        list($bind, $expr, $value) = $this->query();
+        list($bind, $expr, $value) = $this->toArray();
         $operator  = $this->operator;
         $queries   = [$expr];
         $queries[] = $operator;
