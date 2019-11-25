@@ -17,6 +17,16 @@ abstract class Query
     protected $query = [];
 
     /**
+     * Constructor
+     *
+     */
+    public function __construct()
+    {
+        $this->operator = '=';
+        $this->query    = [];
+    }
+
+    /**
      *
      * @return array
      */
