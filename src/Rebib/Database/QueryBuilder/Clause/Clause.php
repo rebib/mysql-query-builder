@@ -23,7 +23,7 @@ abstract class Clause
      *
      * @return array
      */
-    public function get(): array
+    public function toArray(): array
     {
         return $this->clause;
     }

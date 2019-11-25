@@ -1,8 +1,10 @@
 <?php
+
 namespace Rebib\Database\QueryBuilder\Expression;
+
 abstract class Expression
 {
-      /**
+    /**
      *
      * @var array
      */
@@ -17,4 +19,12 @@ abstract class Expression
         $this->expression = [];
     }
 
+    /**
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return $this->expression;
+    }
 }
