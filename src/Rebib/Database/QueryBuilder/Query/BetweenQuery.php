@@ -27,8 +27,18 @@ class BetweenQuery extends Query
 
     public function buildQuery(array &$params): string
     {
-        $queries = [];
-        //TODO
-        return '('.$this->arrayToString($queries, $this->operator()).')';
+        if(!$this->query()){
+            return '';
+        }
+        list($bind, $expr, $min, $max ) = $this->query();
+        $queries = [$expr];
+        if ($bind) {
+            $params[] = $min;
+            $params[] = $max;
+
+            $min = $max = '?';
+        }
+        $queries[] = sprintf($this->operator(), $min, $max);
+        return $this->arrayToString($queries, ' ');
     }
 }

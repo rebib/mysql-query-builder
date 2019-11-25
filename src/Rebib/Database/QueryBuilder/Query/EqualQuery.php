@@ -25,8 +25,19 @@ class EqualQuery extends Query
 
     public function buildQuery(array &$params): string
     {
-        $queries = [];
-        //TODO
-        return '('.$this->arrayToString($queries, $this->operator()).')';
+        if (!$this->query()) {
+            return '';
+        }
+        list($bind, $expr, $value) = $this->query();
+        $operator  = $this->operator;
+        $queries   = [$expr];
+        $queries[] = $operator;
+        if ($bind) {
+            $queries[] = "?";
+            $params[]  = $value;
+        } else {
+            $queries[] = $value;
+        }
+        return $this->arrayToString($queries, ' ');
     }
 }

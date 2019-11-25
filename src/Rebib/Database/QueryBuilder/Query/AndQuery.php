@@ -2,12 +2,12 @@
 
 namespace Rebib\Database\QueryBuilder\Query;
 
-class LessQuery extends EqualQuery
+class AndQuery extends AndOrQuery
 {
     /**
      *
      * @var string
      */
-    protected $operator = ' < ';
+    protected $operator = ' AND ';
 
 }
