@@ -65,7 +65,7 @@ class JoinQueryBuilder extends Builder
             $sql[] = "$type OUTER JOIN";
             $sql[] = '('.$this->arrayToString($v_join[0], ',').')';
             $sql[] = 'ON';
-            $sql[] = '('.$this->arrayToString($v_join[1], ',').')';
+            $sql[] = '('.$this->arrayToString($v_join[1], ' AND ').')';
 
             $query[] = $this->arrayToString($sql, ' ');
         }
