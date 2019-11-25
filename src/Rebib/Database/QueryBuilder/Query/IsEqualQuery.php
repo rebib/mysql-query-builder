@@ -18,6 +18,6 @@ class IsEqualQuery extends EqualQuery
      */
     public function add(string $expr, string $value): IsEqualQuery
     {
-        return $this->add($expr, $value, true);
+        return $this->add($expr, $value, false);
     }
 }
