@@ -2,7 +2,7 @@
 
 namespace Rebib\Database\QueryBuilder\Query;
 
-class IsNotEqualQuery extends EqualQuery
+class IsNotEqualQuery extends IsEqualQuery
 {
     /**
      *
