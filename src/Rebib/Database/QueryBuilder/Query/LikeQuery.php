@@ -26,9 +26,9 @@ class LikeQuery extends Query
      *
      * @return LikeQuery
      */
-    public function setLeftMatch(): LikeQuery
+    public function disableLeftMatch(): LikeQuery
     {
-        $this->right = false;
+        $this->left = false;
         return $this;
     }
 
@@ -36,9 +36,9 @@ class LikeQuery extends Query
      *
      * @return LikeQuery
      */
-    public function setRightMatch(): LikeQuery
+    public function disableRightMatch(): LikeQuery
     {
-        $this->left = false;
+        $this->right = false;
         return $this;
     }
 
