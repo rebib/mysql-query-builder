@@ -41,6 +41,12 @@ class SelectQueryBuilder extends CRUDQueryBuilder
     private $fieldsQuery;
 
     /**
+     *
+     * @var bool
+     */
+    private $isBuild = false;
+
+    /**
      * Constructor
      *
      */
@@ -126,6 +132,8 @@ class SelectQueryBuilder extends CRUDQueryBuilder
      */
     public function buildQuery(): string
     {
+        $this->isBuild = true;
+
         $query[] = 'SELECT '.$this->getFieldsQueryBuilder()->buildQuery();
         $query[] = 'FROM '.$this->getTable();
         $query[] = $this->getJoinQueryBuilder()->buildQuery();
@@ -134,5 +142,13 @@ class SelectQueryBuilder extends CRUDQueryBuilder
         $query[] = $this->getOrderQueryBuilder()->buildQuery();
         $query[] = $this->getOffsetQueryBuilder()->buildQuery();
         return $this->arrayToString($query);
+    }
+
+    public function buildQueryParameters(): array
+    {
+        if ($this->isBuild == false) {
+            $this->buildQuery();
+        }
+        return $this->getWhereQueryBuilder()->getParameters();
     }
 }
