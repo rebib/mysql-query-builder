@@ -15,6 +15,7 @@ use Rebib\Database\QueryBuilder\Query\LessQuery;
 use Rebib\Database\QueryBuilder\Query\NotInQuery;
 use Rebib\Database\QueryBuilder\Query\NotEqualQuery;
 use Rebib\Database\QueryBuilder\Query\OrQuery;
+use Rebib\Database\QueryBuilder\Query\LikeQuery;
 
 class QueryCreator
 {
