@@ -19,7 +19,7 @@ class IsEqualQuery extends EqualQuery
      */
     public function add(string $expr, string $value, bool $bind = true): EqualQuery
     {
-        if (in_array(strtoupper($value), ['TRUE', 'FALSE', 'UNKNOWN', 'NULL'])) {
+        if (!in_array(strtoupper($value), ['TRUE', 'FALSE', 'UNKNOWN', 'NULL'])) {
             return $this;
         } else {
             $bind = false;
