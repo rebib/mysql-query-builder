@@ -66,8 +66,8 @@ class LikeQuery extends Query
         $queries[] = $expr;
         $queries[] = $operator;
         if ($bind) {
-            $queries[] = ($this->left ? '%' : '')."?".($this->right ? '%' : '');
-            $params[]  = $value;
+            $queries[] = "?";
+            $params[]  = ($this->left ? '%' : '').$value.($this->right ? '%' : '');
         } else {
             $queries[] = $value;
         }
