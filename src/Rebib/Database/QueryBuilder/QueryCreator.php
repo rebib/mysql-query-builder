@@ -16,6 +16,7 @@ use Rebib\Database\QueryBuilder\Query\NotInQuery;
 use Rebib\Database\QueryBuilder\Query\NotEqualQuery;
 use Rebib\Database\QueryBuilder\Query\OrQuery;
 use Rebib\Database\QueryBuilder\Query\LikeQuery;
+use Rebib\Database\QueryBuilder\Query\NotLikeQuery;
 
 class QueryCreator
 {
@@ -83,5 +84,15 @@ class QueryCreator
     public static function getOrQuery(): OrQuery
     {
         return new OrQuery();
+    }
+
+    public static function getLikeQuery(): LikeQuery
+    {
+        return new LikeQuery();
+    }
+
+    public static function getNotLikeQuery(): NotLikeQuery
+    {
+        return new NotLikeQuery();
     }
 }
