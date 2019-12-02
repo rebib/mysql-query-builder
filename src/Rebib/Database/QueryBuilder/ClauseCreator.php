@@ -2,15 +2,16 @@
 
 namespace Rebib\Database\QueryBuilder;
 
-use Rebib\Database\QueryBuilder\Clause\JoinClause;
+use Rebib\Database\QueryBuilder\Clause\LeftJoinClasuse;
+use Rebib\Database\QueryBuilder\Clause\RightJoinClause;
 use Rebib\Database\QueryBuilder\Clause\UnionClause;
 
 class ClauseCreator
 {
 
-    public static function getJoinClause(): JoinClause
+    public static function getLeftJoinClause(): JoinClause
     {
-        return new JoinClause();
+        return new LeftJoinClasuse();
     }
 
     public static function getUnionClause(): UnionClause
