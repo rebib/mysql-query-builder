@@ -23,7 +23,7 @@ class EqualQuery extends Query
         return $this;
     }
 
-    public function buildQuery(array &$params): string
+    public function buildQuery(array &$params=[]): string
     {
         if (!$this->toArray()) {
             return '';

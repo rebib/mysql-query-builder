@@ -23,7 +23,7 @@ class InQuery extends Query
         return $this;
     }
 
-    public function buildQuery(array &$params): string
+    public function buildQuery(array &$params=[]): string
     {
         list($bind, $expr, $value) = $this->toArray();
         $operator = $this->operator;
