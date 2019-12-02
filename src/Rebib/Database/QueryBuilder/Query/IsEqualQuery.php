@@ -2,6 +2,8 @@
 
 namespace Rebib\Database\QueryBuilder\Query;
 
+use InvalidArgumentException;
+
 class IsEqualQuery extends EqualQuery
 {
     /**
@@ -20,7 +22,7 @@ class IsEqualQuery extends EqualQuery
     public function add(string $expr, string $value, bool $bind = true): EqualQuery
     {
         if (!in_array(strtoupper($value), ['TRUE', 'FALSE', 'UNKNOWN', 'NULL'])) {
-            return $this;
+            throw new InvalidArgumentException("Invalid value for IS QUERY");
         } else {
             $bind = false;
         }
