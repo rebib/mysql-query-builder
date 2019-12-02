@@ -24,6 +24,6 @@ class IsEqualQuery extends EqualQuery
         } else {
             $bind = false;
         }
-        return $this->add($expr, $value, $bind);
+        return parent::add($expr, $value, $bind);
     }
 }
