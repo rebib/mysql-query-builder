@@ -17,19 +17,6 @@ class JoinQueryBuilder extends Builder
 
     /**
      *
-     * @param JoinClause $clause
-     * @param bool $force
-     * @return JoinQueryBuilder
-     */
-    public function setClause(JoinClause $clause, bool $force = false): JoinQueryBuilder
-    {
-        return call_user_func_array(
-            [$this, 'set'.$clause->getJoinType().'Joins'],
-            [$clause->toArray(), $force]);
-    }
-
-    /**
-     *
      * @param array $joins
      * @param bool $force
      * @return JoinQueryBuilder

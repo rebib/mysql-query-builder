@@ -2,8 +2,6 @@
 
 namespace Rebib\Database\QueryBuilder\Builder;
 
-use Rebib\Database\QueryBuilder\Expression\ColumnExpression;
-
 class FieldsQueryBuilder extends Builder
 {
     /**
@@ -11,18 +9,6 @@ class FieldsQueryBuilder extends Builder
      * @var array
      */
     private $fields = [];
-
-    /**
-     *
-     * @param ColumnExpression $expression
-     * @param bool $force
-     * @return FieldsQueryBuilder
-     */
-    public function setExpression(ColumnExpression $expression,
-                                  bool $force = false): FieldsQueryBuilder
-    {
-        return $this->setFields($expression->toArray(), $force);
-    }
 
     /**
      *
