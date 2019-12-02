@@ -9,7 +9,7 @@ use Rebib\Database\QueryBuilder\Clause\UnionClause;
 class ClauseCreator
 {
 
-    public static function getLeftJoinClause(): JoinClause
+    public static function getLeftJoinClause(): LeftJoinClasuse
     {
         return new LeftJoinClasuse();
     }
