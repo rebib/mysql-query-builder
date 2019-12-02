@@ -2,6 +2,8 @@
 
 namespace Rebib\Database\QueryBuilder\Builder;
 
+use Rebib\Database\QueryBuilder\Clause\JoinClause;
+
 class JoinQueryBuilder extends Builder
 {
     /**
@@ -13,6 +15,25 @@ class JoinQueryBuilder extends Builder
         'RIGHT' => [],
     ];
 
+    /**
+     *
+     * @param JoinClause $clause
+     * @param bool $force
+     * @return JoinQueryBuilder
+     */
+    public function setClause(JoinClause $clause, bool $force = false): JoinQueryBuilder
+    {
+        return call_user_func_array(
+            [$this, 'set'.$clause->getJoinType().'Joins'],
+            [$clause->toArray(), $force]);
+    }
+
+    /**
+     *
+     * @param array $joins
+     * @param bool $force
+     * @return JoinQueryBuilder
+     */
     public function setLeftJoins(array $joins, bool $force = false): JoinQueryBuilder
     {
         if ($force === true) {
@@ -31,6 +52,12 @@ class JoinQueryBuilder extends Builder
         return $this;
     }
 
+    /**
+     *
+     * @param array $table_reference
+     * @param array $join_specification
+     * @return JoinQueryBuilder
+     */
     public function addLeftJoin(array $table_reference,
                                 array $join_specification): JoinQueryBuilder
     {

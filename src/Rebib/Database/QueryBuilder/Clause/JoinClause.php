@@ -4,6 +4,21 @@ namespace Rebib\Database\QueryBuilder\Clause;
 
 class JoinClause extends Clause
 {
+    /**
+     *
+     * @var string
+     */
+    protected $joinType = 'LEFT';
+
+    /**
+     * Return join type
+     * 
+     * @return string
+     */
+    public function getJoinType(): string
+    {
+        return $this->joinType;
+    }
 
     /**
      *
