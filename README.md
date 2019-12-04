@@ -31,14 +31,14 @@ $orQuery->add(
 //ADD OrQuery to AndQuery   
 $andQuery->add($orQuery);
 $selectBuilder->getWhereQueryBuilder()->addQuery($andQuery);
-//OUTPUT QUERy & PARAMS
+//OUTPUT QUERY & PARAMS
 $query         = $selectBuilder->buildQuery();
 $parameters    = $selectBuilder->buildQueryParameters();
 ```
 
 Query
 
-```output
+```SQL
 SELECT *
 FROM (TableA)
 WHERE ((status = ?) AND ((name = ?) OR (sex = ?)))
