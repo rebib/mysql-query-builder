@@ -13,10 +13,12 @@ Build one query with [ X AND ( Y OR Z ) ].
 ```php
         $selectBuilder = QueryBuilder::select();
         $selectBuilder->setTable('TableA');
+        //AND QUERY
         $andQuery      = QueryCreator::getAndQuery();
         $andQuery->add(
             QueryCreator::getEqualQuery()->add(
                 'status', 1));
+        //OR QUERY
         $orQuery = QueryCreator::getOrQuery();
         $orQuery->add(
               QueryCreator::getEqualQuery()->add(
@@ -26,8 +28,10 @@ Build one query with [ X AND ( Y OR Z ) ].
               QueryCreator::getEqualQuery()->add(
                 'sex', 'm')
             );
+        //ADD OrQuery to AndQuery   
         $andQuery->add($orQuery);
         $selectBuilder->getWhereQueryBuilder()->addQuery($andQuery);
+        //OUTPUT QUERy & PARAMS
         $query         = $selectBuilder->buildQuery();
         $parameters    = $selectBuilder->buildQueryParameters();
 ```
