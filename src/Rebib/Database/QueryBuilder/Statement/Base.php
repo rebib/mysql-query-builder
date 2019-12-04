@@ -41,15 +41,27 @@ abstract class Base
     /**
      *
      * @param array $queries
-     * @param string $delimiter
+     * @param string|null $delimiter
+     * @param bool $quotes
      * @return string
      */
-    protected function arrayToString(array $queries, string $delimiter = PHP_EOL): string
+    protected function arrayToString(array $queries, ?string $delimiter,
+                                     bool $quotes = false): string
     {
         $data = array_filter(array_map('trim', $queries), 'strlen');
         if (!$data) {
-            return '';
+            if (empty($delimiter)) {
+                $delimiter = PHP_EOL;
+            }
+            if ($quotes) {
+                $quote  = "'";
+                $string = $quote.implode($quote.$delimiter.$quote, $data).$quote;
+            } else {
+                $string = implode($delimiter, $data);
+            }
+        } else {
+            $string = '';
         }
-        return implode($delimiter, $data);
+        return $string;
     }
 }
