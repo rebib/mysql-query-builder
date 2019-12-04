@@ -8,7 +8,7 @@ $ composer require rebib/mysql-querybuilder
 ```
 
 ## Example
-You can install this plugin with Composer.
+Build one query with [ X AND ( Y OR Z ) ].
 
 ```php
         $selectBuilder = QueryBuilder::select();
