@@ -49,7 +49,7 @@ abstract class Base
                                      bool $quotes = false): string
     {
         $data = array_filter(array_map('trim', $queries), 'strlen');
-        if (!$data) {
+        if ($data) {
             if (empty($delimiter)) {
                 $delimiter = PHP_EOL;
             }
