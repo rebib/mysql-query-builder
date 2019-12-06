@@ -144,7 +144,7 @@ class SelectQueryBuilder extends CRUDQueryBuilder
         return $this->arrayToString($query);
     }
 
-    public function buildQueryParameters(): array
+    public function getQueryParameters(): array
     {
         if ($this->isBuild == false) {
             $this->buildQuery();

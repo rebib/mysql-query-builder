@@ -33,7 +33,7 @@ $andQuery->add($orQuery);
 $selectBuilder->getWhereQueryBuilder()->addQuery($andQuery);
 //OUTPUT QUERY & PARAMS
 $query         = $selectBuilder->buildQuery();
-$parameters    = $selectBuilder->buildQueryParameters();
+$parameters    = $selectBuilder->getQueryParameters();
 ```
 
 Query
