@@ -1,6 +1,6 @@
 <?php
 
-namespace Rebib\Database\QueryBuilder\Builder;
+namespace Rebib\Database\QueryBuilder\Builder\Query;
 
 class OffsetQueryBuilder extends Builder
 {
@@ -44,6 +44,6 @@ class OffsetQueryBuilder extends Builder
         if (!$this->offset['row_count']) {
             return '';
         }
-        return "LIMIT ".$this->arrayToString($this->offset, ',');
+        return "LIMIT ".$this->array2String($this->offset, ',');
     }
 }

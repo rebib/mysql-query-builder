@@ -1,6 +1,6 @@
 <?php
 
-namespace Rebib\Database\QueryBuilder\Builder;
+namespace Rebib\Database\QueryBuilder\Builder\Query;
 
 class OrderQueryBuilder extends Builder
 {
@@ -77,6 +77,6 @@ class OrderQueryBuilder extends Builder
         foreach ($this->queries as $column => $order) {
             $query[] = "$column $order";
         }
-        return 'ORDER BY '.$this->arrayToString($query, ', ');
+        return 'ORDER BY '.$this->array2String($query, ', ');
     }
 }

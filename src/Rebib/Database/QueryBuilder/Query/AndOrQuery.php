@@ -29,6 +29,6 @@ abstract class AndOrQuery extends Query
             $queries[] = $v_query->buildQuery($params);
         }
         return $this->normalizeQuery(
-                $this->arrayToString($queries, $this->operator));
+                $this->array2String($queries, $this->operator));
     }
 }

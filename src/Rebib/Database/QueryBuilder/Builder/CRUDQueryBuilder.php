@@ -30,6 +30,6 @@ abstract class CRUDQueryBuilder extends Builder
      */
     public function getTable(): string
     {
-        return '('.$this->arrayToString($this->tables, ',').')';
+        return '('.$this->array2String($this->tables, ',').')';
     }
 }

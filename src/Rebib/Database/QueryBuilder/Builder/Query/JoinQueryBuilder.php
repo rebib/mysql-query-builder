@@ -1,6 +1,6 @@
 <?php
 
-namespace Rebib\Database\QueryBuilder\Builder;
+namespace Rebib\Database\QueryBuilder\Builder\Query;
 
 use Rebib\Database\QueryBuilder\Clause\JoinClause;
 
@@ -67,7 +67,7 @@ class JoinQueryBuilder extends Builder
                     break;
             }
         }
-        return $this->arrayToString($query);
+        return $this->array2String($query);
     }
 
     //protected
@@ -77,12 +77,12 @@ class JoinQueryBuilder extends Builder
         foreach ($joins as $v_join) {
             $sql   = [];
             $sql[] = "$type OUTER JOIN";
-            $sql[] = '('.$this->arrayToString($v_join[0], ',').')';
+            $sql[] = '('.$this->array2String($v_join[0], ',').')';
             $sql[] = 'ON';
-            $sql[] = '('.$this->arrayToString($v_join[1], ' AND ').')';
+            $sql[] = '('.$this->array2String($v_join[1], ' AND ').')';
 
-            $query[] = $this->arrayToString($sql, ' ');
+            $query[] = $this->array2String($sql, ' ');
         }
-        return $this->arrayToString($query);
+        return $this->array2String($query);
     }
 }

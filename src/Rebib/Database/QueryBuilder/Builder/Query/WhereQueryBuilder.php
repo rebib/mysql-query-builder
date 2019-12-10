@@ -1,6 +1,6 @@
 <?php
 
-namespace Rebib\Database\QueryBuilder\Builder;
+namespace Rebib\Database\QueryBuilder\Builder\Query;
 
 use InvalidArgumentException;
 use Rebib\Database\QueryBuilder\Query\Query;
@@ -185,7 +185,7 @@ class WhereQueryBuilder extends Builder
                 }
             }
         }
-        $where = $this->arrayToString($query, PHP_EOL.'AND ');
+        $where = $this->array2String($query, PHP_EOL.'AND ');
         if ($where) {
             $where = 'WHERE '.$where;
         }
@@ -208,12 +208,12 @@ class WhereQueryBuilder extends Builder
             } else {
                 $con[] = $operator;
                 $con[] = '(';
-                $con[] = $this->arrayToString($value, ',');
+                $con[] = $this->array2String($value, ',');
                 $con[] = ')';
             }
-            $query[] = $this->arrayToString($con, ' ');
+            $query[] = $this->array2String($con, ' ');
         }
-        return '('.$this->arrayToString($query, PHP_EOL.'    AND ').')';
+        return '('.$this->array2String($query, PHP_EOL.'    AND ').')';
     }
 
     protected function buildBetweenQuery(array $conditions): string
@@ -233,9 +233,9 @@ class WhereQueryBuilder extends Builder
             } else {
                 $con[] = 'BETWEEN '.$min.' AND '.$max;
             }
-            $query[] = $this->arrayToString($con, ' ');
+            $query[] = $this->array2String($con, ' ');
         }
-        return '('.$this->arrayToString($query, PHP_EOL.'    AND ').')';
+        return '('.$this->array2String($query, PHP_EOL.'    AND ').')';
     }
 
     protected function buildEqualQuery(array $conditions): string
@@ -255,8 +255,8 @@ class WhereQueryBuilder extends Builder
             } else {
                 $con[] = $value;
             }
-            $query[] = $this->arrayToString($con, ' ');
+            $query[] = $this->array2String($con, ' ');
         }
-        return '('.$this->arrayToString($query, PHP_EOL.' AND ').')';
+        return '('.$this->array2String($query, PHP_EOL.' AND ').')';
     }
 }

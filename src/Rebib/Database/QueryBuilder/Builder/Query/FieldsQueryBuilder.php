@@ -1,6 +1,6 @@
 <?php
 
-namespace Rebib\Database\QueryBuilder\Builder;
+namespace Rebib\Database\QueryBuilder\Builder\Query;
 
 class FieldsQueryBuilder extends Builder
 {
@@ -45,6 +45,6 @@ class FieldsQueryBuilder extends Builder
         if (!$this->fields) {
             $this->fields = ['*'];
         }
-        return $this->arrayToString($this->fields, ',');
+        return $this->array2String($this->fields, ',');
     }
 }

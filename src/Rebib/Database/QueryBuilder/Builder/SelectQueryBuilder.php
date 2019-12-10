@@ -2,6 +2,13 @@
 
 namespace Rebib\Database\QueryBuilder\Builder;
 
+use Rebib\Database\QueryBuilder\Builder\Query\FieldsQueryBuilder;
+use Rebib\Database\QueryBuilder\Builder\Query\GroupQueryBuilder;
+use Rebib\Database\QueryBuilder\Builder\Query\OffsetQueryBuilder;
+use Rebib\Database\QueryBuilder\Builder\Query\JoinQueryBuilder;
+use Rebib\Database\QueryBuilder\Builder\Query\WhereQueryBuilder;
+use Rebib\Database\QueryBuilder\Builder\Query\OrderQueryBuilder;
+
 class SelectQueryBuilder extends CRUDQueryBuilder
 {
     /**
@@ -141,7 +148,7 @@ class SelectQueryBuilder extends CRUDQueryBuilder
         $query[] = $this->getGroupQueryBuilder()->buildQuery();
         $query[] = $this->getOrderQueryBuilder()->buildQuery();
         $query[] = $this->getOffsetQueryBuilder()->buildQuery();
-        return $this->arrayToString($query);
+        return $this->array2String($query);
     }
 
     public function getQueryParameters(): array

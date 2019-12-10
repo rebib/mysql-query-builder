@@ -1,6 +1,6 @@
 <?php
 
-namespace Rebib\Database\QueryBuilder\Builder;
+namespace Rebib\Database\QueryBuilder\Builder\Query;
 
 class GroupQueryBuilder extends Builder
 {
@@ -45,6 +45,6 @@ class GroupQueryBuilder extends Builder
         if (!$this->groups) {
             return '';
         }
-        return 'GROUP BY '.$this->arrayToString($this->groups, ',');
+        return 'GROUP BY '.$this->array2String($this->groups, ',');
     }
 }
