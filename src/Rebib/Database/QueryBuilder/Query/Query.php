@@ -17,7 +17,7 @@ abstract class Query extends Base
      * @param array $params
      * @return string
      */
-    abstract public function buildQuery(array &$params=[]): string;
+    abstract public function buildQuery(array &$params = []): string;
 
     /**
      *
@@ -26,6 +26,10 @@ abstract class Query extends Base
      */
     protected function normalizeQuery(string $query): string
     {
+        if ($query === "") {
+            return '';
+        }
+
         if (trim($query)) {
             $query = "($query)";
         }
