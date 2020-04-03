@@ -13,7 +13,7 @@ class EqualQuery extends Query
     /**
      *
      * @param string $expr
-     * @param array $value
+     * @param string $value
      * @param bool $bind bind parameter or not
      * @return EqualQuery
      */
