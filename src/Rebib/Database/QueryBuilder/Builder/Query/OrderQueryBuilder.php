@@ -2,8 +2,10 @@
 
 namespace Rebib\Database\QueryBuilder\Builder\Query;
 
-class OrderQueryBuilder extends Builder
-{
+use Rebib\Database\QueryBuilder\Builder\Builder;
+
+class OrderQueryBuilder extends Builder {
+
     /**
      *
      * @var array
@@ -19,10 +21,10 @@ class OrderQueryBuilder extends Builder
      * @return OrderQueryBuilder
      */
     public function addOrder(string $column, string $order,
-                             string $table_ref = null, bool $force = false): OrderQueryBuilder
+            string $table_ref = null, bool $force = false): OrderQueryBuilder
     {
         if (!empty($table_ref)) {
-            $column = $table_ref.'.'.$column;
+            $column = $table_ref . '.' . $column;
         }
         if ($force === false && !empty($this->queries[$column])) {
             return $this;
@@ -45,7 +47,7 @@ class OrderQueryBuilder extends Builder
      * @return OrderQueryBuilder
      */
     public function addOrderByAsc(string $column, string $table_ref = null,
-                                  bool $force = false): OrderQueryBuilder
+            bool $force = false): OrderQueryBuilder
     {
         return $this->addOrder($column, 'ASC', $table_ref, $force);
     }
@@ -59,7 +61,7 @@ class OrderQueryBuilder extends Builder
      * @return OrderQueryBuilder
      */
     public function addOrderByDesc(string $column, string $table_ref = null,
-                                   bool $force = false): OrderQueryBuilder
+            bool $force = false): OrderQueryBuilder
     {
         return $this->addOrder($column, 'DESC', $table_ref, $force);
     }
@@ -77,6 +79,7 @@ class OrderQueryBuilder extends Builder
         foreach ($this->queries as $column => $order) {
             $query[] = "$column $order";
         }
-        return 'ORDER BY '.$this->array2String($query, ', ');
+        return 'ORDER BY ' . $this->array2String($query, ', ');
     }
+
 }

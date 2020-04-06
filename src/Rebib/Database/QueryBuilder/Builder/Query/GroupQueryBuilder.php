@@ -2,8 +2,10 @@
 
 namespace Rebib\Database\QueryBuilder\Builder\Query;
 
-class GroupQueryBuilder extends Builder
-{
+use Rebib\Database\QueryBuilder\Builder\Builder;
+
+class GroupQueryBuilder extends Builder {
+
     /**
      *
      * @var array
@@ -45,6 +47,7 @@ class GroupQueryBuilder extends Builder
         if (!$this->groups) {
             return '';
         }
-        return 'GROUP BY '.$this->array2String($this->groups, ',');
+        return 'GROUP BY ' . $this->array2String($this->groups, ',');
     }
+
 }

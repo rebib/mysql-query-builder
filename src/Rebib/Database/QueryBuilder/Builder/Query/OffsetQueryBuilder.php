@@ -2,8 +2,10 @@
 
 namespace Rebib\Database\QueryBuilder\Builder\Query;
 
-class OffsetQueryBuilder extends Builder
-{
+use Rebib\Database\QueryBuilder\Builder\Builder;
+
+class OffsetQueryBuilder extends Builder {
+
     /**
      *
      * @var array
@@ -44,6 +46,7 @@ class OffsetQueryBuilder extends Builder
         if (!$this->offset['row_count']) {
             return '';
         }
-        return "LIMIT ".$this->array2String($this->offset, ',');
+        return "LIMIT " . $this->array2String($this->offset, ',');
     }
+
 }

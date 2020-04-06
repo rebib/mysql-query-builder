@@ -2,8 +2,10 @@
 
 namespace Rebib\Database\QueryBuilder\Builder\Query;
 
-class FieldsQueryBuilder extends Builder
-{
+use Rebib\Database\QueryBuilder\Builder\Builder;
+
+class FieldsQueryBuilder extends Builder {
+
     /**
      *
      * @var array
@@ -47,4 +49,5 @@ class FieldsQueryBuilder extends Builder
         }
         return $this->array2String($this->fields, ',');
     }
+
 }

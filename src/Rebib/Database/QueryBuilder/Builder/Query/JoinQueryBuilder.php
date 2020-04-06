@@ -3,9 +3,10 @@
 namespace Rebib\Database\QueryBuilder\Builder\Query;
 
 use Rebib\Database\QueryBuilder\Clause\JoinClause;
+use Rebib\Database\QueryBuilder\Builder\Builder;
 
-class JoinQueryBuilder extends Builder
-{
+class JoinQueryBuilder extends Builder {
+
     /**
      *
      * @var array
@@ -46,7 +47,7 @@ class JoinQueryBuilder extends Builder
      * @return JoinQueryBuilder
      */
     public function addLeftJoin(array $table_reference,
-                                array $join_specification): JoinQueryBuilder
+            array $join_specification): JoinQueryBuilder
     {
         $this->queries['LEFT'][] = [
             $table_reference,
@@ -75,14 +76,15 @@ class JoinQueryBuilder extends Builder
     {
         $query = [];
         foreach ($joins as $v_join) {
-            $sql   = [];
+            $sql = [];
             $sql[] = "$type OUTER JOIN";
-            $sql[] = '('.$this->array2String($v_join[0], ',').')';
+            $sql[] = '(' . $this->array2String($v_join[0], ',') . ')';
             $sql[] = 'ON';
-            $sql[] = '('.$this->array2String($v_join[1], ' AND ').')';
+            $sql[] = '(' . $this->array2String($v_join[1], ' AND ') . ')';
 
             $query[] = $this->array2String($sql, ' ');
         }
         return $this->array2String($query);
     }
+
 }
