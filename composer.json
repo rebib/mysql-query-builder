@@ -17,8 +17,10 @@
         "php": "^7.2"
     },
     "autoload": {
-        "psr-4": {
-            "Rebib\\Database\\QueryBuilder\\": "src/Rebib"
+        "psr-4": {            
+            "Rebib\\Database\\QueryBuilder\\": [
+                "src/Rebib/Database/QueryBuilder"
+            ] 
         }
     },
     "autoload-dev": {
