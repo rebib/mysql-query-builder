@@ -18,7 +18,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Rebib\\Database\\QueryBuilder\\": "src/Rebib"
+            "Rebib\\Database\\QueryBuilder\\": [
+                "src/Rebib/Database/QueryBuilder"
+            ] 
         }
     },
     "autoload-dev": {
